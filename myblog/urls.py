@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from index.view import base_init
+from TestModel.views import index, save_user_info
+
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index/', base_init),
+    url(r'^', index),
+    url(r'^commit/', save_user_info)
 ]
+

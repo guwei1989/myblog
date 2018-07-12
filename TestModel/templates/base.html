@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-3.3.7/dist/css/bootstrap.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap-3.3.7/dist/css/bootstrap-theme.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-datetimepicker.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-select.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/my_design.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/uploadify.css" %}">
+
+    <script type="text/javascript" src="{% static "js/jquery-3.3.1.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery-ui.js" %}"></script>
+    <script type="text/javascript" src="{% static "bootstrap-3.3.7/dist/js/bootstrap.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootbox.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap-datetimepicker.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap-select.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/utils.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/echarts.common.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/echarts.min.js" %}"></script>
+
+</head>
+
+<body>
+<img src="{% static "pic/car.png" %}"/>
+<div> {{ a }}</div>
+<div> {{ b }}</div>
+<button id="commit" style="width: 50px;height: 30px;"></button>
+<script type="text/javascript">
+    $("#commit").click(function () {
+        $.ajax({
+            type: 'POST',
+            url: "/commit",
+            data: {
+                "user": "guwei",
+                "password": "123456",
+                "auth": "root",
+                "time": "2018-06-5"
+            },
+
+            success: function (chunk, textStatus) {
+
+
+                if (chunk.result == 0) {
+                    bootbox.alert({
+                        title: "提示信息",
+                        message: "保存成功！",
+                        size: "small"
+                    });
+                } else {
+                    bootbox.alert({
+                        title: "提示信息",
+                        message: "服务器端错误，请联系开发人员！",
+                        size: "small"
+                    });
+                }
+            },
+
+            error: function () {
+                bootbox.alert({
+                    title: "提示信息",
+                    message: "网络超时，请联系管理员！",
+                    size: "small"
+                });
+            },
+            timeout: 60000,
+            dataType: 'json'
+        });
+    })
+</script>
+
+</body>
+<script></script>
+</html>
